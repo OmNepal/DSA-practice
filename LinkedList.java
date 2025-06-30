@@ -1,5 +1,6 @@
 class LL {
     Node head;
+    int size;
 
     class Node {
         String data;
@@ -13,6 +14,7 @@ class LL {
 
     void insertAtFirst(String data) {
         Node newNode = new Node(data);
+        size++;
         if (head == null) {
             head = newNode;
             return;
@@ -23,6 +25,7 @@ class LL {
     }
 
     void deleteAtFirst() {
+        size--;
         if (head == null) {
             System.out.print("The list is empty!");
             return;
@@ -30,8 +33,39 @@ class LL {
         head = head.next;
     }
 
+    void insertAtIndex(int index, String data) {
+        if (index > size || index < 0) {
+            System.out.print("Invalid Index!");
+            return;
+        }
+
+        Node newNode = new Node(data);
+
+        size++;
+
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+
+        if (index == 0) {
+            this.insertAtFirst(data);
+        }
+
+        Node currNode = head;
+
+        for (int i = 1; i <= index; i++) {
+            if (i == index) {
+                newNode.next = currNode.next;
+                currNode.next = newNode;
+            }
+            currNode = currNode.next;
+        }
+    }
+
     void insertAtLast(String data) {
         Node newNode = new Node(data);
+        size++;
         if (head == null) {
             head = newNode;
             return;
@@ -47,6 +81,7 @@ class LL {
     }
 
     void deleteAtLast() {
+        size--;
         if (head == null) {
             System.out.print("The list is empty!");
             return;
@@ -66,6 +101,10 @@ class LL {
 
     }
 
+    int getSize(){
+        return size;
+    }
+
     void printList() {
         Node currNode = head;
         while (currNode != null) {
@@ -74,6 +113,8 @@ class LL {
         }
         System.out.println("null");
     }
+
+
 
     public static void main(String[] args) {
         LL list = new LL();
@@ -86,11 +127,23 @@ class LL {
         list.insertAtLast("data");
         list.insertAtLast("structure");
         list.printList();
+        System.out.println(list.getSize());
 
         list.deleteAtFirst();
         list.printList();
+        System.out.println(list.getSize());
 
         list.deleteAtLast();
+        list.printList();
+        System.out.println(list.getSize());
+
+        list.insertAtIndex(2, "linked");
+        list.printList();
+
+        list.insertAtIndex(0, "this");
+        list.printList();
+
+        list.insertAtIndex(5, "structure");
         list.printList();
     }
 
