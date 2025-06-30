@@ -26,11 +26,14 @@ public class LinkedListSearch7 {
 
     void printList() {
         Node currNode = head;
-        while (currNode.next != null) {
-            System.out.print(currNode.data + ", ");
+        while (currNode != null) {
+            if (currNode.next != null)
+                System.out.print(currNode.data + ", ");
+            else
+                System.out.println(currNode.data);
             currNode = currNode.next;
         }
-        System.out.println(currNode.data);
+
     }
 
     int searchData(Integer data) {
@@ -45,6 +48,25 @@ public class LinkedListSearch7 {
         }
 
         return -1;
+    }
+
+    void deleteValuesOver(Integer value) {
+        while (head != null && head.data > value) {
+            head = head.next;
+        }
+
+        Node currNode = head;
+        Node prev = head;
+        while (currNode != null) {
+
+            if (currNode.data > value) {
+                prev.next = currNode.next;
+                currNode = currNode.next;
+                continue;
+            }
+            prev = currNode;
+            currNode = currNode.next;
+        }
     }
 
     public static void main(String[] args) {
@@ -66,5 +88,10 @@ public class LinkedListSearch7 {
 
         int numIndex = list.searchData(num);
         System.out.println(numIndex >= 0 ? "Number found at index: " + numIndex : "Number not found");
+
+        System.out.print("Numbers over what should be removed from the list? ");
+        int numOver = scanner.nextInt();
+        list.deleteValuesOver(numOver);
+        list.printList();
     }
 }
