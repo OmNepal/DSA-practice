@@ -45,6 +45,17 @@ public class StackPractice {
             return head.data;
         }
 
+        public static void pushAtBottom(int data){//recursive method to push provided value at the bottom of the stack
+            if (isEmpty()){
+                push(data);
+                return;
+            }
+
+            int top = pop();
+            pushAtBottom(data); //Recursion
+            push(top);
+        }
+
     }
 
 
@@ -57,15 +68,14 @@ public class StackPractice {
         stack.push(4);
         stack.push(5);
 
+        stack.pushAtBottom(7);
+
         while (!stack.isEmpty()){
             System.out.println(stack.peek());
             stack.pop();
         }
 
     }
-
-
-
-
+    
 
 }
