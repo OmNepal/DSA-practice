@@ -56,6 +56,15 @@ public class StackPractice {
             push(top);
         }
 
+        public static void reverseStack(){ //recursive method to reverse the stack by popping elements and pushing them at the bottom instead of top
+            if (isEmpty()){
+                return;
+            }
+            int top = pop();
+            reverseStack();
+            pushAtBottom(top);
+        }
+
     }
 
 
@@ -70,12 +79,14 @@ public class StackPractice {
 
         stack.pushAtBottom(7);
 
+        stack.reverseStack();
+
         while (!stack.isEmpty()){
             System.out.println(stack.peek());
             stack.pop();
         }
 
     }
-    
+
 
 }
