@@ -44,6 +44,15 @@ class BinaryTreePractice {
             System.out.print(root.data +" ");
             inOrderTraversal(root.right);
         }
+
+        public static void postOrderTraversal(Node root) {
+            if (root == null) {
+                return;
+            }
+            postOrderTraversal(root.left);
+            postOrderTraversal(root.right);
+            System.out.print(root.data +" ");
+        }
     }
 
     public static void main(String[] args) {
@@ -61,6 +70,11 @@ class BinaryTreePractice {
 
         System.out.print("In order traversal: ");
         tree.inOrderTraversal(root);
+
+        System.out.println();
+
+        System.out.print("Post order traversal: ");
+        tree.postOrderTraversal(root);
     }
 
 }
