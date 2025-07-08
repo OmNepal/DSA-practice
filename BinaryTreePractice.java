@@ -25,6 +25,16 @@ class BinaryTreePractice {
 
             return newNode;
         }
+
+        public static void preOrderTraversal(Node root) {
+            if (root == null) {
+                return;
+            }
+            System.out.print(root.data + " ");
+            preOrderTraversal(root.left);
+            preOrderTraversal(root.right);
+
+        }
     }
 
     public static void main(String[] args) {
@@ -33,8 +43,9 @@ class BinaryTreePractice {
         BinaryTree tree = new BinaryTree();
         Node root = tree.buildTree(nodes);
 
-        System.out.println(root.data);
+        System.out.println("Root" + root.data);
 
+        tree.preOrderTraversal(root);
     }
 
 }
