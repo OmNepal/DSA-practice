@@ -82,6 +82,15 @@ class BinaryTreePractice {
             }
 
         }
+
+        public static int countNodes(Node root) {
+            if(root == null) {
+                return 0;
+            }
+            int x = countNodes(root.left);
+            int y = countNodes(root.right);
+            return x + y + 1;
+        }
     }
 
     public static void main(String[] args) {
@@ -109,6 +118,8 @@ class BinaryTreePractice {
         System.out.println("Level order traversal: ");
         tree.levelOrderTraversal(root);
         System.out.println();
+
+        System.out.println("Total nodes in the tree: " + tree.countNodes(root));
     }
 
 }
