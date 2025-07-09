@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 class BinaryTreePractice {
     static class Node {
         int data;
@@ -53,6 +56,32 @@ class BinaryTreePractice {
             postOrderTraversal(root.right);
             System.out.print(root.data +" ");
         }
+
+        public static void levelOrderTraversal(Node root) {
+            Queue<Node> q = new LinkedList<>();
+            q.add(root);
+            q.add(null);
+
+            while(!q.isEmpty()) {
+                Node curr = q.remove();
+                if (curr == null) {
+                    System.out.println();
+                    if (q.isEmpty()) {
+                        break;
+                    }
+                    q.add(null);
+                } else {
+                    System.out.print(curr.data + " ");
+                    if (curr.left != null) {
+                        q.add(curr.left);
+                    }
+                    if (curr.right != null) {
+                        q.add(curr.right);
+                    }
+                }
+            }
+
+        }
     }
 
     public static void main(String[] args) {
@@ -75,6 +104,11 @@ class BinaryTreePractice {
 
         System.out.print("Post order traversal: ");
         tree.postOrderTraversal(root);
+        System.out.println();
+
+        System.out.println("Level order traversal: ");
+        tree.levelOrderTraversal(root);
+        System.out.println();
     }
 
 }
