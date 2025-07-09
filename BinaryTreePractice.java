@@ -111,7 +111,45 @@ class BinaryTreePractice {
             return Math.max(leftHeight + 1, rightHeight + 1);
         }
 
+        //in the first approach, we calculate 3 diameters from left, right and both(using heights) and return the maximum
+        //time complexity: O(N^2) -> visit each node and calculate height for each node
+        public static int diameterApproach1(Node root) {
+            if (root == null) {
+                return 0;
+            }
 
+            int leftD = diameterApproach1(root.left);
+            int rightD = diameterApproach1(root.right);
+            int leftRightD = treeHeight(root.left) + treeHeight(root.right) + 1;
+
+            return Math.max(leftD, Math.max(rightD, leftRightD));
+        }
+
+        static class TreeInfo {
+            int height;
+            int diameter;
+
+            TreeInfo(int ht, int diam) {
+                height = ht;
+                diameter = diam;
+            }
+        }
+
+        //in this approach, we calculate both the height and diameter within the same function and used a simple static class to return both at once
+        //Time complexity: O(n) -> bcoz each node is visited once
+        public static TreeInfo diameterApproach2(Node root) {
+            if (root == null) {
+                return new TreeInfo(0, 0);
+            }
+
+            TreeInfo l = diameterApproach2(root.left);
+            TreeInfo r = diameterApproach2(root.right);
+
+            int h = Math.max(l.height, r.height) + 1;
+            int d = Math.max(l.diameter, Math.max(r.diameter, l.height + r.height + 1));
+
+            return new TreeInfo(h, d);
+        }
     }
 
     public static void main(String[] args) {
@@ -146,6 +184,9 @@ class BinaryTreePractice {
 
         System.out.println(tree.treeHeight(root));
 
+        System.out.println("Diameter (Approach1): " + tree.diameterApproach2(root).diameter );
+
+        System.out.println("Diameter (Approach2): " + tree.diameterApproach2(root).diameter );
     }
 
 }
