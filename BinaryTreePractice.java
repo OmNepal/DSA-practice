@@ -91,6 +91,27 @@ class BinaryTreePractice {
             int y = countNodes(root.right);
             return x + y + 1;
         }
+
+        public static int sumOfNodes(Node root) {
+            if(root == null) {
+                return 0;
+            }
+            int leftSum = sumOfNodes(root.left);
+            int rightSum = sumOfNodes(root.right);
+            return leftSum + rightSum + root.data;
+        }
+
+
+        public static int treeHeight(Node root) {
+            if (root == null)
+                return 0;
+            int leftHeight = treeHeight(root.left);
+            int rightHeight = treeHeight(root.right);
+
+            return Math.max(leftHeight + 1, rightHeight + 1);
+        }
+
+
     }
 
     public static void main(String[] args) {
@@ -120,6 +141,11 @@ class BinaryTreePractice {
         System.out.println();
 
         System.out.println("Total nodes in the tree: " + tree.countNodes(root));
+
+        System.out.println("Sum of nodes in the tree: " + tree.sumOfNodes(root));
+
+        System.out.println(tree.treeHeight(root));
+
     }
 
 }
