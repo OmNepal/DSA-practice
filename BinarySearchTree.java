@@ -22,6 +22,20 @@ class BinarySearchTree {
         return root;
     }
 
+    public static boolean searchBST(int key, Node root) {
+        if (root == null)
+            return false;
+
+        if (key < root.data) {
+            return searchBST(key, root.left);
+        } else if (root.data == key){
+            return true;
+        } else {
+            return searchBST(key, root.right);
+        }
+
+    }
+
     public static void main(String[] args) {
         int values[] = {5,1,3,4,2,7};
         Node root = null;
@@ -32,5 +46,8 @@ class BinarySearchTree {
         System.out.print(root.left.data + " ");
         System.out.println(root.right.data);
         System.out.println(root.left.right.data);
+
+        boolean result = BinarySearchTree.searchBST(7, root);
+        System.out.println(result);
     }
 }
