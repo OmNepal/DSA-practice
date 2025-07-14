@@ -70,6 +70,30 @@
         return root;
      }
 
+     //public static int sum = 0;
+     public static int rangeSumBST(Node root, int low, int high) {
+         int sum = 0;
+         if (root == null) {
+             return 0;
+         }
+
+         if (low <= root.data && root.data <= high) {
+             sum += rangeSumBST(root.left, low, root.data);
+             sum += rangeSumBST(root.right, root.data, high);
+             sum += root.data;
+         }
+         else if (low > root.data) {
+             //Check right subtree
+             sum += rangeSumBST(root.right, low, high);
+         }
+         else {
+             //Check left subtree
+             sum += rangeSumBST(root.left, low, high);
+         }
+
+         return sum;
+     }
+
 
      public static void main(String[] args) {
         int values[] = {5,1,3,4,2,7};
