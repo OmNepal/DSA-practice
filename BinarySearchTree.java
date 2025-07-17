@@ -1,4 +1,5 @@
- class BinarySearchTree {
+import java.util.*;
+class BinarySearchTree {
     static class Node {
         int data;
         Node left;
@@ -94,6 +95,26 @@
          return sum;
      }
 
+     static List<Integer> list = new ArrayList<Integer>();
+     public static void path(Node root) {
+         if (root == null) {
+             return;
+         }
+         list.add(root.data);
+         if (root.left == null && root.right == null) {
+             for (int i=0;i<list.size()-1;i++) {
+                 System.out.print(list.get(i) +"=>");
+             }
+             System.out.println(list.get(list.size()-1));
+             list.remove(list.size()-1);
+             return;
+         }
+         path(root.left);
+         path(root.right);
+
+         list.remove(list.size()-1);
+     }
+
 
      public static void main(String[] args) {
         int values[] = {5,1,3,4,2,7};
@@ -121,6 +142,9 @@
          System.out.println("      " + root.left.right.data); // 4 takes 3's place
          System.out.print("    " + root.left.right.left.data  + "   "); // 2
          //System.out.println(root.left.right.right.data); //  null instead of 4
+
+         System.out.println();
+         BinarySearchTree.path(root);
 
 
     }
